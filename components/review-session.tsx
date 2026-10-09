@@ -146,7 +146,9 @@ function useSessionKeys({
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
       const target = event.target as HTMLElement | null;
-      if (target && (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.isContentEditable)) return;
+      // Keys mean "flip or rate" only when nothing else has focus: on a button, an input or a tab,
+      // Space and Enter already belong to that control.
+      if (target && (target.closest("button, a, input, textarea, select, [contenteditable='true']") || target.isContentEditable)) return;
       if (done) return;
       if (event.key === " " || event.key === "Enter") {
         event.preventDefault();
