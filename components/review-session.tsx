@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -119,17 +119,16 @@ export function ReviewSession({ queue: initialQueue, onRestart }: { queue: Flash
       <p className="text-center text-xs text-muted-foreground">
         Space or Enter flips the card. 1 rates Again, 2 rates Good, 3 rates Easy.
       </p>
-
-      <KeyboardRater flipped={flipped} busy={busy} done={done} onFlip={() => setFlipped(true)} onRate={rate} />
     </div>
   );
 }
 
 /**
- * The session's keyboard handling, kept out of the render path. Mounted only while a session is
- * running; Space and Enter flip, and 1, 2, 3 rate — but only once the back is showing.
+ * The session's keyboard handling, mounted only while a session is running. Space and Enter flip,
+ * and 1, 2, 3 rate — but only once the back is showing. Re-subscribed on every render so the
+ * handler always sees the latest flipped/busy/done state.
  */
-function KeyboardRater({
+function useSessionKeys({
   flipped,
   busy,
   done,
@@ -142,40 +141,29 @@ function KeyboardRater({
   onFlip: () => void;
   onRate: (rating: Rating) => Promise<void>;
 }) {
-  return (
-    <KeyboardListener
-      onKey={(event) => {
-        const target = event.target as HTMLElement | null;
-        if (target && (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.isContentEditable)) return;
-        if (done) return;
-        if (event.key === " " || event.key === "Enter") {
-          event.preventDefault();
-          if (!flipped) onFlip();
-          return;
-        }
-        if (!flipped || busy) return;
-        if (event.key === "1") {
-          event.preventDefault();
-          void onRate("again");
-        } else if (event.key === "2") {
-          event.preventDefault();
-          void onRate("good");
-        } else if (event.key === "3") {
-          event.preventDefault();
-          void onRate("easy");
-        }
-      }}
-    />
-  );
-}
-
-function KeyboardListener({ onKey }: { onKey: (event: KeyboardEvent) => void }) {
-  // Re-subscribed on every render so the handler always sees the latest flipped/busy/done state.
   useEffect(() => {
+    const onKey = (event: KeyboardEvent) => {
+      const target = event.target as HTMLElement | null;
+      if (target && (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.isContentEditable)) return;
+      if (done) return;
+      if (event.key === " " || event.key === "Enter") {
+        event.preventDefault();
+        if (!flipped) onFlip();
+        return;
+      }
+      if (!flipped || busy) return;
+      if (event.key === "1") {
+        event.preventDefault();
+        void onRate("again");
+      } else if (event.key === "2") {
+        event.preventDefault();
+        void onRate("good");
+      } else if (event.key === "3") {
+        event.preventDefault();
+        void onRate("easy");
+      }
+    };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   });
-  return null;
 }
-
-import { useEffect } from "react";
