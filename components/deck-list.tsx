@@ -95,7 +95,7 @@ export function DeckList({ cards, onAddCard }: { cards: Flashcard[]; onAddCard: 
           <div className="space-y-1.5">
             <CardTitle>Deck</CardTitle>
             <CardDescription>
-              {cards.length} {cards.length === 1 ? "card" : "cards"}, oldest first by due date.
+              {cards.length} {cards.length === 1 ? "card" : "cards"}, soonest due first.
             </CardDescription>
           </div>
           <Button variant="destructive" size="sm" onClick={() => setConfirmingClear(true)}>
