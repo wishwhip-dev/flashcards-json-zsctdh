@@ -117,7 +117,7 @@ export function FlashcardsApp() {
       <header className="space-y-3">
         <p className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">Spaced repetition</p>
         <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">Flashcards</h1>
-        <p aria-live="polite" className="text-muted-foreground">
+        <div aria-live="polite" className="text-muted-foreground">
           {isLoading ? (
             <Skeleton className="inline-block h-5 w-56 align-middle" />
           ) : cards ? (
@@ -127,7 +127,7 @@ export function FlashcardsApp() {
               <span className="font-medium text-foreground">{dueCards.length}</span> due for review right now.
             </>
           ) : null}
-        </p>
+        </div>
         <div className="flex flex-col gap-2 sm:flex-row">
           <Button size="lg" onClick={startSession}>
             Review cards
