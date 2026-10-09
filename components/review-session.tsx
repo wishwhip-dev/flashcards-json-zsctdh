@@ -43,6 +43,8 @@ export function ReviewSession({ queue: initialQueue, onRestart }: { queue: Flash
     }
   };
 
+  useSessionKeys({ flipped, busy, done, onFlip: () => setFlipped(true), onRate: rate });
+
   if (done) {
     const reviewed = counts.again + counts.good + counts.easy;
     return (
