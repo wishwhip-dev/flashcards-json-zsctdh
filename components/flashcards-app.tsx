@@ -103,7 +103,7 @@ export function FlashcardsApp() {
 
   const loadSampleDeck = () => void loadCards(SAMPLE_DECK.cards, "the built-in sample deck");
 
-  const loadCards = async (parsed: { front: string; back: string }[], fileName: string) => {
+  return (
     <div className="space-y-6">
       {storageStatus === "memory" && (
         <Alert>
