@@ -13,7 +13,7 @@ import { DeckList } from "@/components/deck-list";
 import { ReviewSession } from "@/components/review-session";
 import { StatsPanel } from "@/components/stats-panel";
 import { database, type Flashcard } from "@/lib/db";
-import { addParsedCards, listCards, parseDeckJson, type LoadResult } from "@/lib/data/deck";
+import { addParsedCards, listCards, parseDeckJson } from "@/lib/data/deck";
 import { SAMPLE_DECK } from "@/lib/data/sample-deck";
 import { formatDayKey, todayKey } from "@/lib/dates";
 import { readAsJson } from "@/lib/files";
