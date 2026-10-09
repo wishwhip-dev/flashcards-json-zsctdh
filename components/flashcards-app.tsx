@@ -15,7 +15,7 @@ import { StatsPanel } from "@/components/stats-panel";
 import type { Flashcard } from "@/lib/db";
 import { addParsedCards, listCards, parseDeckJson, type LoadResult } from "@/lib/data/deck";
 import { SAMPLE_DECK } from "@/lib/data/sample-deck";
-import { formatDayKey } from "@/lib/dates";
+import { formatDayKey, todayKey } from "@/lib/dates";
 import { readAsJson } from "@/lib/files";
 import { useStorageStatus, useStoredQuery } from "@/lib/storage/react";
 
@@ -242,10 +242,6 @@ export function FlashcardsApp() {
       </Tabs>
 
       <AddCardDialog open={addOpen} onOpenChange={setAddOpen} />
-
-      {deckEmpty && null}
     </div>
   );
 }
-
-import { todayKey } from "@/lib/dates";
