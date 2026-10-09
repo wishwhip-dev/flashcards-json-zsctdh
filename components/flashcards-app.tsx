@@ -12,7 +12,7 @@ import { AddCardDialog } from "@/components/add-card-dialog";
 import { DeckList } from "@/components/deck-list";
 import { ReviewSession } from "@/components/review-session";
 import { StatsPanel } from "@/components/stats-panel";
-import type { Flashcard } from "@/lib/db";
+import { database, type Flashcard } from "@/lib/db";
 import { addParsedCards, listCards, parseDeckJson, type LoadResult } from "@/lib/data/deck";
 import { SAMPLE_DECK } from "@/lib/data/sample-deck";
 import { formatDayKey, todayKey } from "@/lib/dates";

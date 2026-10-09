@@ -60,8 +60,8 @@ export function StatsPanel({ cards }: { cards: Flashcard[] }) {
           <ChartContainer config={chartConfig} className="h-[240px] w-full">
             <BarChart data={data} margin={{ top: 8, right: 8, left: -16, bottom: 0 }}>
               <CartesianGrid vertical={false} />
-              <XAxis dataKey="label" tickLine={false} axisLine={false} minTickGap={12} tickFontSize={11} />
-              <YAxis allowDecimals={false} tickLine={false} axisLine={false} width={32} tickFontSize={11} />
+              <XAxis dataKey="label" tickLine={false} axisLine={false} minTickGap={12} tick={{ fontSize: 11 }} />
+              <YAxis allowDecimals={false} tickLine={false} axisLine={false} width={32} tick={{ fontSize: 11 }} />
               <ChartTooltip content={<ChartTooltipContent />} />
               <Bar dataKey="due" fill="var(--color-due)" radius={4} isAnimationActive={false} />
             </BarChart>
