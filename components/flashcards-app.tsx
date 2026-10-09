@@ -142,7 +142,7 @@ export function FlashcardsApp() {
         <CardHeader>
           <CardTitle>Grow your deck</CardTitle>
           <CardDescription>
-            Load cards from a JSON file shaped like {"{"}&quot;cards&quot;: [{"{"}&quot;front&quot;: &quot;...&quot;, &quot;back&quot;: &quot;...&quot;{"}"}]{"}"}, or start with the built-in sample. Loaded cards join the deck; nothing already here is removed, and fronts already in the deck are skipped.
+            Load cards from a JSON file with a &quot;cards&quot; array of front/back pairs, or start with the built-in sample. Loaded cards join the deck — nothing already here is removed, and fronts the deck already has are skipped.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-3">
