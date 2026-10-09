@@ -3,8 +3,9 @@ import "./globals.css";
 import { Providers } from "./providers";
 
 export const metadata: Metadata = {
-  title: "New application",
-  description: "Created by the Assistant developer",
+  title: "Flashcards — spaced repetition",
+  description:
+    "A flashcard deck in your browser: add cards by hand or load them from a JSON file, review with Again / Good / Easy scheduling, and watch what comes due.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

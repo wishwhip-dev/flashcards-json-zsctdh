@@ -1,0 +1,20 @@
+# Plan
+
+Goal: Spaced repetition flashcards. I can type cards, review them with 'again / good / easy' scheduling, and I can load a whole deck from a JSON file I choose from my computer; after loading, show how many cards came in and list them.
+
+1. The home page shows a 'Review cards' button and an 'Add card' button, both visible and enabled, with a live readout of how many cards exist and how many are due for review right now
+2. Clicking 'Add card' opens a form with labelled Front and Back text inputs and a 'Save card' submit button; saving works from the home page with no navigation, the card appears in the deck list immediately, and submitting with an empty front is blocked with a message instead of saving a blank card
+3. The deck list is a table showing every card with its front, back, current interval and due date, with a 'Delete' button per row that removes that card only; the list lives under a tab or section reachable from the home page
+4. Clicking 'Review cards' starts a session that shows the front of a due card; clicking the card (or pressing Space) flips it to reveal the back, and the card stays flipped until a rating is chosen
+5. When the back is showing, three buttons labelled 'Again', 'Good' and 'Easy' rate the card. Again sets the card due again the same day and brings it back within the session; Good on a new card schedules it for tomorrow and each further Good multiplies its current interval, capped at one year; Easy schedules a new card four days out and multiplies further from there. A card rated Good twice then Easy shows an interval of 4 days or longer in the deck list
+6. A review session ends with a summary showing how many cards were reviewed and how many got each rating; when no cards are due the review area says so and names the date the next card comes due, and when the deck is empty it says so and points to adding or loading cards
+7. Cards added through the form and cards loaded from a JSON file, along with each card's due date and interval after rating, are still present with their schedules intact after reloading the page
+8. A 'Load JSON deck' button on the home page opens the file chooser via the FileDrop component; choosing a JSON file of the documented shape ({"cards":[{"front":"...","back":"..."]}]) adds its cards without removing cards already in the deck, then a summary line and a toast state how many cards came in and the deck list shows them all; loading the same file twice does not create duplicate fronts — the summary reports added and skipped counts separately, and a file with an empty cards array reports that zero cards came in
+9. Choosing a file that is not valid JSON, lacks a cards array, or contains entries without a front shows an on-page error message naming the problem, and the existing deck is unchanged
+10. Keyboard operation: in review, Space or Enter flips the card and keys 1, 2 and 3 rate it Again, Good and Easy respectively, matching the on-screen buttons; the keys do nothing while the front is showing except flip it
+11. A 'Load sample deck' button fills the deck from a built-in sample of 24 cards across world capitals, languages and basic science that lives in its own data module under lib/data, separate from the components that render it
+12. A chart on a stats section plots the number of cards coming due on each of the next 7 days, rendered with the project's Recharts wrapper, next to readouts of total cards, cards due today and cards learned (interval of 7 days or more)
+13. The whole layout, including the review card, rating buttons and deck table, stays usable on a phone-sized screen with no horizontal scrolling or clipped buttons
+14. A 'Delete all cards' control in the deck list section, clearly labelled as destructive, empties the deck after a confirmation dialog and the empty-state message then invites adding or loading cards
+
+These are the outcomes this task is judged against.
